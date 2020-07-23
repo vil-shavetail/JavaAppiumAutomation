@@ -136,6 +136,62 @@ public class FirstTest {
         );
     }
 
+    @Test
+    public void testFindCoupleOfArticlesAndCancelSearch() {
+        waitForElementAndClick(
+                By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
+                "Cannot find 'Search Wikipedia' input",
+                5
+        );
+
+        waitForElementAndSendKeys(
+                By.xpath("//*[contains(@text, 'Search…')]"),
+                "React",
+                "Cannot find search input",
+                5
+        );
+
+        waitForElementPresent(
+                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='React']"),
+                "The article title 'React' is missing from the search results for 'React'"
+        );
+
+        waitForElementPresent(
+                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='React (web framework)']"),
+                "The article title 'React (web framework)' is missing from the search results for 'React'"
+        );
+
+        waitForElementPresent(
+                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='ReactOS']"),
+                "The article title 'ReactOS' is missing from the search results for 'React'"
+        );
+
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/search_close_btn"),
+                "Cannot find X to cancel search",
+                5
+        );
+
+        waitForElementNotPresent(
+                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='React']"),
+                "The article title 'React' is still present in the search results",
+                5
+        );
+
+        waitForElementNotPresent(
+                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='React (web framework)']"),
+                "The article title 'React (web framework)' is still present in the search results",
+                5
+        );
+
+        waitForElementNotPresent(
+                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='ReactOS']"),
+                "The article title 'ReactOS' is still present in the search results",
+                5
+        );
+
+    }
+
     private WebElement waitForElementPresent(By by, String error_message, long timeoutInSeconds){
         WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
         wait.withMessage(error_message + "\n");
@@ -180,5 +236,7 @@ public class FirstTest {
         );
 
     }
+
+
 
 }
