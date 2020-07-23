@@ -192,6 +192,67 @@ public class FirstTest {
 
     }
 
+    @Test
+    public void testSearchTextContainsInEachTitleSearchResult(){
+        String search_string = "JAVA";
+        String[] search_result = new String[5];
+        String error_message = "Element is not present";
+
+        waitForElementAndClick(
+                By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
+                "Cannot find 'Search Wikipedia' input",
+                5
+        );
+
+        waitForElementAndSendKeys(
+                By.xpath("//*[contains(@text, 'Search…')]"),
+                search_string,
+                "Cannot find search input",
+                5
+        );
+
+        WebElement first = waitForElementPresent(
+                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Java']"),
+                error_message
+
+        );
+        search_result[0] = first.getAttribute("text");
+
+        WebElement second = waitForElementPresent(
+                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='JavaScript']"),
+                error_message
+        );
+        search_result[1] = second.getAttribute("text");
+
+
+        WebElement third = waitForElementPresent(
+                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Java (programming language)']"),
+                error_message
+        );
+        search_result[2] = third.getAttribute("text");
+
+        WebElement fourth = waitForElementPresent(
+                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Java (software platform)']"),
+                error_message
+        );
+        search_result[3] = fourth.getAttribute("text");
+
+        WebElement fifth = waitForElementPresent(
+                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Javanese language']"),
+                error_message
+        );
+        search_result[4] = fifth.getAttribute("text");
+
+        for (int i = 0; i < search_result.length; i++){
+            Assert.assertTrue(
+                    "Element " + (i + 1) + " with text '"+ search_result[i] +"' is not contains searching text '"
+                            + search_string + "'",
+                    search_result[i].toLowerCase().contains(search_string.toLowerCase())
+            );
+        }
+
+    }
+
     private WebElement waitForElementPresent(By by, String error_message, long timeoutInSeconds){
         WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
         wait.withMessage(error_message + "\n");
@@ -234,9 +295,6 @@ public class FirstTest {
                 expected_element_text,
                 actual_element_text
         );
-
     }
-
-
 
 }
