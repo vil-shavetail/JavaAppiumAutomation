@@ -549,6 +549,37 @@ public class FirstTest {
         );
     }
 
+    @Test
+    public void testAssertArticleTitlePresent() {
+        waitForElementAndClick(
+                By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
+                "Cannot find 'Search Wikipedia' input",
+                5
+        );
+
+        String search_line = "Yamaha Niken";
+        By search_article_locator = By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_title'][@text='" + search_line + "']");
+        By search_article_title_locator = By.xpath("//*[@resource-id='org.wikipedia:id/view_page_title_text'][@text='" + search_line + "']");
+
+        waitForElementAndSendKeys(
+                By.xpath("//*[contains(@text, 'Search…')]"),
+                search_line,
+                "Cannot find search input",
+                5
+        );
+
+        waitForElementAndClick(
+                search_article_locator,
+                "Cannot find '" + search_line + "' article in search",
+                8
+        );
+
+        assertElementPresent(
+                search_article_title_locator,
+                search_line
+        );
+    }
+
     private WebElement waitForElementPresent(By by, String error_message, long timeoutInSeconds){
         WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
         wait.withMessage(error_message + "\n");
@@ -658,5 +689,21 @@ public class FirstTest {
     private String waitForElementAndGetAttribute(By by, String attribute, String error_message, long timeoutInSeconds) {
         WebElement element = waitForElementPresent(by, error_message, timeoutInSeconds);
         return element.getAttribute(attribute);
+    }
+
+    private void assertElementPresent(By by, String search_line) {
+        String error_message = "Cannot find article title with text '" + search_line +"'";
+        WebElement element = waitForElementPresent(
+                by,
+                error_message,
+                0
+        );
+
+        String text_element = element.getAttribute("text").toString();
+        String default_message = "An element '" + by.toString() + "' supposed to be not present.";
+
+        if(!search_line.equalsIgnoreCase(text_element)){
+            throw new AssertionError(default_message + " " + error_message);
+        }
     }
 }
