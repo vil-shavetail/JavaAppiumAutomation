@@ -580,6 +580,252 @@ public class FirstTest {
         );
     }
 
+    @Test
+    public void testSaveTwoArticlesInMyList() {
+        waitForElementAndClick(
+                By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
+                "Cannot find 'Search Wikipedia' input",
+                5
+        );
+
+        String search_line = "Yamaha YZ";
+        waitForElementAndSendKeys(
+                By.xpath("//*[contains(@text, 'Search…')]"),
+                search_line,
+                "Cannot find search input",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Sport bike']"),
+                "Cannot find 'Sport bile' topic searching by '" + search_line + "'",
+                8
+        );
+
+        waitForElementPresent(
+                By.id("org.wikipedia:id/view_page_title_text"),
+                "Cannot find article title",
+                15
+        );
+
+        waitForElementAndClick(
+                By.xpath("//android.widget.ImageView[@content-desc='More options']"),
+                "Cannot find button to open article options",
+                5
+        );
+
+        waitForElementPresent(
+                By.xpath("//*[@text='Add to reading list']"),
+                "Cannot find option to add article to reading list",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//*[@text='Add to reading list']"),
+                "Cannot find option to add article to reading list",
+                0
+        );
+
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/onboarding_button"),
+                "Cannot find 'Got it' tip overlay",
+                5
+        );
+
+        waitForElementAndClear(
+                By.id("org.wikipedia:id/text_input"),
+                "Cannot find input to set name of articles folder",
+                10
+        );
+
+        String name_of_folder = "Yamaha bikes";
+
+        waitForElementAndSendKeys(
+                By.id("org.wikipedia:id/text_input"),
+                name_of_folder,
+                "Cannot put text into articles folder input",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//*[@text='OK']"),
+                "Cannot press OK button",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"),
+                "Cannot close article, cannot find X link",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
+                "Cannot find 'Search Wikipedia' input",
+                5
+        );
+
+        waitForElementAndSendKeys(
+                By.xpath("//*[contains(@text, 'Search…')]"),
+                search_line,
+                "Cannot find search input",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Yzf600r']"),
+                "Cannot find 'Sport bile' topic searching by '" + search_line + "'",
+                8
+        );
+
+        waitForElementPresent(
+                By.id("org.wikipedia:id/view_page_title_text"),
+                "Cannot find article title",
+                15
+        );
+
+        waitForElementAndClick(
+                By.xpath("//android.widget.ImageView[@content-desc='More options']"),
+                "Cannot find button to open article options",
+                5
+        );
+
+        waitForElementPresent(
+                By.xpath("//*[@text='Add to reading list']"),
+                "Cannot find option to add article to reading list",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//*[@text='Add to reading list']"),
+                "Cannot find option to add article to reading list",
+                5
+        );
+
+        waitForElementPresent(
+                By.xpath("//*[@text='Yamaha bikes']"),
+                "Cannot find saved articles list 'Yamaha bikes'",
+                10
+        );
+
+        waitForElementAndClick(
+                By.xpath("//*[@text='Yamaha bikes']"),
+                "Cannot open articles list 'Yamaha bikes'",
+                5
+        );
+
+        waitForElementPresent(
+                By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"),
+                "Cannot close article, cannot find X link",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"),
+                "Cannot close article, cannot find X link",
+                5
+        );
+
+        waitForElementPresent(
+                By.xpath("//android.widget.FrameLayout[@content-desc='My lists']"),
+                "Cannot find navigate button to My lists",
+                10
+        );
+
+        waitForElementAndClick(
+                By.xpath("//android.widget.FrameLayout[@content-desc='My lists']"),
+                "Cannot find navigate button to My lists",
+                5
+        );
+
+        waitForElementPresent(
+                By.xpath("//*[@text='" + name_of_folder + "']"),
+                "Cannot find created folder '" + name_of_folder +"'",
+                10
+        );
+
+        waitForElementAndClick(
+                By.xpath("//*[@text='" + name_of_folder + "']"),
+                "Cannot find created folder '" + name_of_folder + "'",
+                5
+        );
+
+        Assert.assertEquals("Cannot find articles in the 'Yamaha bikes' list",
+                2,
+                driver.findElements(By.id("org.wikipedia:id/page_list_item_container")).size()
+        );
+
+        swipeElementToLeft(
+                By.xpath("//*[@text='Yamaha YZF-R1']"),
+                "Cannot find saved article"
+        );
+
+        waitForElementNotPresent(
+                By.xpath("//*[@text='Yamaha YZF-R1']"),
+                "Cannot delete saved article",
+                5
+        );
+
+        Assert.assertEquals("Cannot find article in the 'Yamaha bikes' list",
+                1,
+                driver.findElements(By.id("org.wikipedia:id/page_list_item_container")).size()
+        );
+
+        waitForElementAndClick(
+                By.xpath("//*[@text='Yamaha YZF-R6']"),
+                "Cannot delete saved article",
+                5
+        );
+
+        waitForElementPresent(
+                By.xpath("//*[@text='Yamaha YZF-R6']"),
+                "Cannot find article title 'Yamaha YZF-R6'",
+                10
+        );
+
+        waitForElementPresent(
+                By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"),
+                "Cannot close article, cannot find X link",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"),
+                "Cannot close article, cannot find X link",
+                5
+        );
+
+        waitForElementPresent(
+                By.id("org.wikipedia:id/item_overflow_menu"),
+                "Cannot find 'More options' button",
+                5
+        );
+
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/item_overflow_menu"),
+                "Cannot find 'More options' button",
+                5
+        );
+
+        waitForElementPresent(
+                By.xpath("//*[@text='Delete list']"),
+                "Cannot find option to delete list",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//*[@text='Delete list']"),
+                "Cannot find option to delete list",
+                5
+        );
+
+        waitForElementPresent(
+                By.xpath("//*[@text='No reading lists yet']"),
+                "Cannot find message 'No reading lists yet'",
+                10
+        );
+    }
+
     private WebElement waitForElementPresent(By by, String error_message, long timeoutInSeconds){
         WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
         wait.withMessage(error_message + "\n");
