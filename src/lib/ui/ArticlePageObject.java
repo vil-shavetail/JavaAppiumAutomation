@@ -87,8 +87,54 @@ public class ArticlePageObject extends MainPageObject {
 
     };
 
+    public void findCloseArticleButton() {
+        this.waitForElementPresent(
+                By.xpath(CLOSE_ARTICLE_BUTTON),
+                "Cannot close article, cannot find X link",
+                5
+        );
+    }
+
     public void closeArticle() {
         this.waitForElementAndClick(
+                By.xpath(CLOSE_ARTICLE_BUTTON),
+                "Cannot close article, cannot find X link",
+                5
+        );
+    }
+
+    public void addArticleToSavedList(String name_of_folder) {
+        this.waitForElementAndClick(
+                By.xpath(OPTIONS_BUTTON),
+                "Cannot find button to open article options",
+                5
+        );
+
+        this.waitForElementPresent(
+                By.xpath(OPTIONS_ADD_TO_MY_LIST_BUTTON),
+                "Cannot find option to add article to reading list",
+                5
+        );
+
+        this.waitForElementAndClick(
+                By.xpath(OPTIONS_ADD_TO_MY_LIST_BUTTON),
+                "Cannot find option to add article to reading list",
+                5
+        );
+
+        this.waitForElementPresent(
+                By.xpath("//*[@text='" + name_of_folder + "']"),
+                "Cannot find saved articles list '" + name_of_folder + "'",
+                10
+        );
+
+        this.waitForElementAndClick(
+                By.xpath("//*[@text='" + name_of_folder + "']"),
+                "Cannot open articles list '" + name_of_folder + "'",
+                5
+        );
+
+        this.waitForElementPresent(
                 By.xpath(CLOSE_ARTICLE_BUTTON),
                 "Cannot close article, cannot find X link",
                 5

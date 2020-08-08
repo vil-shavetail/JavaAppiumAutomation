@@ -47,4 +47,21 @@ public class SearchTests extends CoreTestCase {
         searchPageObject.assertThereIsNoResultOfSearch();
     }
 
+    @Test
+    public void testFindCoupleOfArticlesAndCancelSearch() {
+        SearchPageObject searchPageObject = new SearchPageObject(driver);
+        searchPageObject.initSearchInput();
+        String search_line = "React";
+        searchPageObject.typeSearchLine(search_line);
+        String first_search_result_article_title = "React";
+        String second_search_result_article_title = "React (web framework)";
+        String third_search_result_article_title = "ReactOS";
+        searchPageObject.waitForSearchResult(first_search_result_article_title);
+        searchPageObject.waitForSearchResult(second_search_result_article_title);
+        searchPageObject.waitForSearchResult(third_search_result_article_title);
+        searchPageObject.waitForCancelButtonToAppear();
+        searchPageObject.clickCancelSearch();
+        searchPageObject.assertThereIsNoResultOfSearch();
+    }
+
 }

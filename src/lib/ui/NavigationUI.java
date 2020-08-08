@@ -12,6 +12,14 @@ public class NavigationUI extends MainPageObject {
         super(driver);
     }
 
+    public void findMyLists() {
+        this.waitForElementPresent(
+                By.xpath(MY_LISTS_LINK),
+                "Cannot find navigate button to My lists",
+                10
+        );
+    }
+
     public void clickMyLists() {
         this.waitForElementAndClick(
                 By.xpath(MY_LISTS_LINK),
@@ -19,4 +27,5 @@ public class NavigationUI extends MainPageObject {
                 5
         );
     }
+
 }
