@@ -64,4 +64,21 @@ public class SearchTests extends CoreTestCase {
         searchPageObject.assertThereIsNoResultOfSearch();
     }
 
+    @Test
+    public void testFindArticlesByTitleAndDescription() {
+        String search_line = "The Witcher",
+                first_article_title = "The Witcher",
+                first_article_description = "Series of fantasy novels and short stories by Polish writer Andrzej Sapkowski",
+                second_article_title = "The Witcher (TV series)",
+                second_article_description = "2019 fantasy drama television series",
+                third_article_title = "The Witcher 3: Wild Hunt",
+                third_article_description = "2015 action role-playing video game";
+        SearchPageObject searchPageObject = new SearchPageObject(driver);
+        searchPageObject.initSearchInput();
+        searchPageObject.typeSearchLine(search_line);
+        searchPageObject.waitForElementByTitleAndDescription(first_article_title, first_article_description);
+        searchPageObject.waitForElementByTitleAndDescription(second_article_title, second_article_description);
+        searchPageObject.waitForElementByTitleAndDescription(third_article_title, third_article_description);
+    }
+
 }

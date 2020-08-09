@@ -10,8 +10,9 @@ public class SearchPageObject extends MainPageObject {
             SEARCH_INPUT = "//*[contains(@text, 'Search…')]",
             SEARCH_CANCEL_BUTTON = "org.wikipedia:id/search_close_btn",
             SEARCH_RESULT_BY_SUBSTRING_TPL = "//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='{SUBSTRING}']",
+            SEARCH_RESULT_BY_TWO_SUBSTRING_TPL = "//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='{TITLE}']//..//*[@text='{DESCRIPTION}']",
             SEARCH_RESULT_ELEMENT = "//*[@resource-id='org.wikipedia:id/search_results_list']/*[@resource-id='org.wikipedia:id/page_list_item_container']",
-            SEARCH_EMPTY_RESULT_ELEMENT = "//*[@text='No results found']";;
+            SEARCH_EMPTY_RESULT_ELEMENT = "//*[@text='No results found']";
 
     public SearchPageObject(AppiumDriver driver) {
         super(driver);
@@ -20,6 +21,10 @@ public class SearchPageObject extends MainPageObject {
     /* TEMPLATES METHODS */
     private static String getResultSearchElement(String substring) {
         return SEARCH_RESULT_BY_SUBSTRING_TPL.replace("{SUBSTRING}", substring);
+    }
+
+    private static String getReulstSearchElementByTitleAndDescription(String title, String descritption) {
+        return SEARCH_RESULT_BY_TWO_SUBSTRING_TPL.replace("{TITLE}", title).replace("{DESCRIPTION}", descritption);
     }
     /* TEMPLATES METHODS */
 
@@ -107,6 +112,15 @@ public class SearchPageObject extends MainPageObject {
         this.assertElementNotPresent(
                 By.xpath(SEARCH_RESULT_ELEMENT),
                 "We supposed not to find any results"
+        );
+    }
+
+    public void waitForElementByTitleAndDescription(String title, String description) {
+        String search_result_xpath = getReulstSearchElementByTitleAndDescription(title, description);
+        this.waitForElementPresent(
+                By.xpath(search_result_xpath),
+                "Cannot find search result with title '" + title + "' and description '" + description + "'",
+                10
         );
     }
 }
