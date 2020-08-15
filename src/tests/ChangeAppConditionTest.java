@@ -42,7 +42,7 @@ public class ChangeAppConditionTest extends CoreTestCase {
         searchPageObject.initSearchInput();
         searchPageObject.typeSearchLine("Java");
         searchPageObject.waitForSearchResult("Object-oriented programming language");
-        this.backgroundApp(2);
+        backgroundApp(2);
         searchPageObject.waitForSearchResult("Object-oriented programming language");
     }
 

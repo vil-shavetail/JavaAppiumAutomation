@@ -1,7 +1,6 @@
 import lib.CoreTestCase;
 import lib.ui.MainPageObject;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class FirstTest extends CoreTestCase {
@@ -17,7 +16,7 @@ public class FirstTest extends CoreTestCase {
     @Test
     public void testCompareElementText() {
         mainPageObject.assertElementHasText(
-                By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
+                "xpath://*[contains(@text, 'Search Wikipedia')]",
                 "Search Wikipedia",
                 "We see unexpected element text"
         );
@@ -30,46 +29,46 @@ public class FirstTest extends CoreTestCase {
         String error_message = "Element is not present";
 
         mainPageObject.waitForElementAndClick(
-                By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
+                "xpath://*[contains(@text, 'Search Wikipedia')]",
                 "Cannot find 'Search Wikipedia' input",
                 5
         );
 
         mainPageObject.waitForElementAndSendKeys(
-                By.xpath("//*[contains(@text, 'Search…')]"),
+                "xpath://*[contains(@text, 'Search…')]",
                 search_string,
                 "Cannot find search input",
-                5
+                10
         );
 
         WebElement first = mainPageObject.waitForElementPresent(
-                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Java']"),
+                "xpath://*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Java']",
                 error_message
 
         );
         search_result[0] = first.getAttribute("text");
 
         WebElement second = mainPageObject.waitForElementPresent(
-                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='JavaScript']"),
+                "xpath://*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='JavaScript']",
                 error_message
         );
         search_result[1] = second.getAttribute("text");
 
 
         WebElement third = mainPageObject.waitForElementPresent(
-                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Java (programming language)']"),
+                "xpath://*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Java (programming language)']",
                 error_message
         );
         search_result[2] = third.getAttribute("text");
 
         WebElement fourth = mainPageObject.waitForElementPresent(
-                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Java (software platform)']"),
+                "xpath://*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Java (software platform)']",
                 error_message
         );
         search_result[3] = fourth.getAttribute("text");
 
         WebElement fifth = mainPageObject.waitForElementPresent(
-                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Javanese language']"),
+                "xpath://*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Javanese language']",
                 error_message
         );
         search_result[4] = fifth.getAttribute("text");

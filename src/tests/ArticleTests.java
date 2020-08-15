@@ -4,7 +4,6 @@ import lib.CoreTestCase;
 import lib.ui.ArticlePageObject;
 import lib.ui.SearchPageObject;
 import org.junit.Test;
-import org.openqa.selenium.By;
 
 public class ArticleTests extends CoreTestCase {
 
@@ -40,7 +39,7 @@ public class ArticleTests extends CoreTestCase {
     @Test
     public void testAssertArticleTitlePresent() {
         String search_line = "Yamaha Niken";
-        By search_article_title_locator = By.xpath("//*[@resource-id='org.wikipedia:id/view_page_title_text'][@text='" + search_line + "']");
+        String search_article_title_locator = "xpath://*[@resource-id='org.wikipedia:id/view_page_title_text'][@text='" + search_line + "']";
         SearchPageObject searchPageObject = new SearchPageObject(driver);
         searchPageObject.initSearchInput();
         searchPageObject.typeSearchLine(search_line);
