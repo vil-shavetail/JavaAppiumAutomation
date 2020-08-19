@@ -63,13 +63,15 @@ public class MyListsTests extends CoreTestCase {
 
         assertEquals("Cannot find articles in the '" + name_of_folder + "' list",
                 2,
-                driver.findElements(By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']")).size()
+                driver.findElements(By.id("org.wikipedia:id/page_list_item_container")).size()
+//                driver.findElements(By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']")).size()
         );
 
         myListsPageObject.swipeByArticleToDelete(article_title);
         assertEquals("Cannot find article in the '" + name_of_folder + "' list",
                 1,
-                driver.findElements(By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']")).size()
+                driver.findElements(By.id("org.wikipedia:id/page_list_item_container")).size()
+//                driver.findElements(By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']")).size()
         );
 
         article_title = "Yamaha YZF-R6";
