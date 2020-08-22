@@ -9,7 +9,7 @@ public class IOSSearchPageObject extends SearchPageObject {
         SEARCH_INPUT = "xpath://XCUIElementTypeSearchField";
         SEARCH_CANCEL_BUTTON = "id:Close";
         SEARCH_RESULT_BY_SUBSTRING_TPL = "xpath://XCUIElementTypeStaticText[@name='{SUBSTRING}']";
-        SEARCH_RESULT_BY_TWO_SUBSTRING_TPL = "xpath://XCUIElementTypeStaticText[@name='{SUBSTRING}']//..//XCUIElementTypeStaticText[@name='{DESCRIPTION}']";
+        SEARCH_RESULT_BY_TWO_SUBSTRING_TPL = "xpath://XCUIElementTypeStaticText[@name='{TITLE}']/..//XCUIElementTypeStaticText[@name='{DESCRIPTION}']/..";
         SEARCH_RESULT_ELEMENT = "xpath://XCUIElementTypeStaticText";
         SEARCH_EMPTY_RESULT_ELEMENT = "id:No results found";
     }
