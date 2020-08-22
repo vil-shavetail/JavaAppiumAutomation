@@ -1,14 +1,15 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
+import lib.Platform;
 
-public class MyListsPageObject extends MainPageObject {
+abstract public class MyListsPageObject extends MainPageObject {
 
-    public static final String
-        FOLDER_BY_NAME_TPL = "xpath://*[@text='{FOLDER_NAME}']",
-        ARTICLE_BY_TITLE_TPL = "xpath://*[@text='{TITLE}']",
-        DELETE_LIST_BUTTON = "xpath://*[@text='Delete list']",
-        MORE_OPTIONS_BUTTON = "id:org.wikipedia:id/item_overflow_menu";
+    protected static String
+        FOLDER_BY_NAME_TPL,
+        ARTICLE_BY_TITLE_TPL,
+        DELETE_LIST_BUTTON,
+        MORE_OPTIONS_BUTTON;
 
     private static String getFolderXpathByName(String name_of_folder) {
         return FOLDER_BY_NAME_TPL.replace("{FOLDER_NAME}", name_of_folder);
@@ -74,7 +75,12 @@ public class MyListsPageObject extends MainPageObject {
                 article_xpath,
                 "Cannot find saved article"
         );
-        this.waitForArticleToDisappearByTitle(article_title);
+        if(Platform.getInstance().isAndroid()){
+            this.waitForArticleToDisappearByTitle(article_title);
+        } else {
+            this.clickSwipeActionDeleteButton();
+        }
+
     }
 
     public void deleteMyList() {
@@ -114,6 +120,14 @@ public class MyListsPageObject extends MainPageObject {
         this.waitForElementAndClick(
                 article_xpath,
                 "Cannot find saved article with title" + article_title,
+                5
+        );
+    }
+
+    public void clickSwipeActionDeleteButton() {
+        this.waitForElementAndClick(
+                "id:swipe action delete",
+                "Cannot find 'Swipe action delete' button ",
                 5
         );
     }

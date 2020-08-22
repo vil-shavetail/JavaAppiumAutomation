@@ -54,8 +54,8 @@ public class MainPageObject {
         wait.withMessage(error_message + "\n");
         return wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
     }
-    public WebElement waitForElementAndClear(String locator, String error_messag, long timeoutInSeconds) {
-        WebElement element = waitForElementPresent(locator, error_messag, timeoutInSeconds);
+    public WebElement waitForElementAndClear(String locator, String error_message, long timeoutInSeconds) {
+        WebElement element = waitForElementPresent(locator, error_message, timeoutInSeconds);
         element.clear();
         return element;
     }
@@ -196,5 +196,19 @@ public class MainPageObject {
         } else {
             throw new IllegalArgumentException("Cannot get type of locator, Locator: " + locator_with_type);
         }
+    }
+
+    public void clickElementToTheRightUpperCorner(String locator, String error_message) {
+        WebElement element = this.waitForElementPresent(locator, error_message);
+        int right_x = element.getLocation().getX();
+        int upper_y = element.getLocation().getY();
+        int lower_y = upper_y + element.getSize().getHeight();
+        int middle_y = (upper_y + lower_y) / 2;
+        int width = element.getSize().getWidth();
+        int point_to_click_x = (right_x + width) - 3;
+        int point_to_click_y = middle_y;
+
+        TouchAction action = new TouchAction(driver);
+        action.tap(PointOption.point(point_to_click_x, point_to_click_y)).perform();
     }
 }

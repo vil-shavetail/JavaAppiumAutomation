@@ -31,7 +31,7 @@ abstract public class SearchPageObject extends MainPageObject {
         this.waitForElementAndClick(
                 SEARCH_INIT_ELEMENT,
                 "Cannot find and click search init element",
-                5
+                7
         );
         this.waitForElementPresent(
                 SEARCH_INIT_ELEMENT,

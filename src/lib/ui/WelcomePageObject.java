@@ -10,7 +10,8 @@ public class WelcomePageObject extends MainPageObject {
     STEP_LEARN_MORE_ABOUT_DATA_COLLECTED_LINK = "xpath://*[@name='Learn more about data collected']",
     NEXT_LINK = "xpath://*[@name='Next']",
     GET_STARTED_BUTTON = "xpath://*[@name='Get started']",
-    SKIP = "id:Skip";
+    SKIP = "id:Skip",
+    DISMISS = "xpath://XCUIElementTypeStaticText[@name='Dismiss']";
 
     public WelcomePageObject(AppiumDriver driver) {
         super(driver);
@@ -69,6 +70,14 @@ public class WelcomePageObject extends MainPageObject {
                 SKIP,
                 "Cannot find and click 'Skip' button",
                 5
+        );
+    }
+
+    public void clickDismiss() {
+        this.waitForElementAndClick(
+                DISMISS,
+                "Cannot find and click 'Dismiss' link",
+                7
         );
     }
 }
