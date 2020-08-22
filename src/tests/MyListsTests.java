@@ -5,6 +5,7 @@ import lib.ui.ArticlePageObject;
 import lib.ui.MyListsPageObject;
 import lib.ui.NavigationUI;
 import lib.ui.SearchPageObject;
+import lib.ui.factories.ArticlePageObjectFactory;
 import lib.ui.factories.SearchPageObjectFactory;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -18,7 +19,7 @@ public class MyListsTests extends CoreTestCase {
         searchPageObject.typeSearchLine("Java");
         searchPageObject.clickByArticleWithSubString("Object-oriented programming language");
 
-        ArticlePageObject articlePageObject = new ArticlePageObject(driver);
+        ArticlePageObject articlePageObject = ArticlePageObjectFactory.get(driver);
         articlePageObject.waitForTitleElement();
         String article_title = articlePageObject.getArticleTitle();
         String name_of_folder = "Learning programming";
@@ -40,7 +41,7 @@ public class MyListsTests extends CoreTestCase {
         searchPageObject.typeSearchLine("Yamaha YZ");
         searchPageObject.clickByArticleWithSubString("Sport bike");
 
-        ArticlePageObject articlePageObject = new ArticlePageObject(driver);
+        ArticlePageObject articlePageObject = ArticlePageObjectFactory.get(driver);
         articlePageObject.waitForTitleElement();
         String article_title = articlePageObject.getArticleTitle();
         String name_of_folder = "Yamaha bikes";
