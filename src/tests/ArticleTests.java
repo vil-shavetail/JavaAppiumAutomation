@@ -29,13 +29,18 @@ public class ArticleTests extends CoreTestCase {
 
     @Test
     public void testSwipeArticle() {
+        String expected_article_title = "Appium";
         SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
         searchPageObject.initSearchInput();
         searchPageObject.typeSearchLine("Appium");
-        searchPageObject.clickByArticleWithSubString("Appium");
+        searchPageObject.clickByArticleWithSubString(expected_article_title);
 
         ArticlePageObject articlePageObject = ArticlePageObjectFactory.get(driver);
-        articlePageObject.waitForTitleElement();
+        if(Platform.getInstance().isAndroid()){
+            articlePageObject.waitForTitleElement();
+        }else {
+            articlePageObject.waitForTitleElement(expected_article_title);
+        }
         articlePageObject.swipeToFooter();
     }
 

@@ -132,4 +132,12 @@ abstract public class MyListsPageObject extends MainPageObject {
         );
     }
 
+    public void getNoSavedPagesYetScreenForIOS() {
+        this.waitForElementPresent(
+            "xpath://XCUIElementTypeStaticText[@name='No saved pages yet']",
+                "Still present saved articles in the Saved list.",
+                10
+        );
+    }
+
 }

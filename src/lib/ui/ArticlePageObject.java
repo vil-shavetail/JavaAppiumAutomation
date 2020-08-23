@@ -28,6 +28,15 @@ abstract public class ArticlePageObject extends MainPageObject {
         );
     }
 
+    public WebElement waitForTitleElement(String search_line){
+        String locator = "id:" + search_line;
+        return this.waitForElementPresent(
+                TITLE = locator,
+                "Cannot find article title on page!",
+                15
+        );
+    }
+
     public String getArticleTitle() {
         WebElement title_element = waitForTitleElement();
         if(Platform.getInstance().isAndroid()) {
@@ -35,7 +44,6 @@ abstract public class ArticlePageObject extends MainPageObject {
         } else {
             return title_element.getAttribute("name");
         }
-
     }
 
     public void swipeToFooter() {
