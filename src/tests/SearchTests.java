@@ -1,6 +1,7 @@
 package tests;
 
 import lib.CoreTestCase;
+import lib.Platform;
 import lib.ui.SearchPageObject;
 import lib.ui.factories.SearchPageObjectFactory;
 import org.junit.Test;
@@ -45,7 +46,9 @@ public class SearchTests extends CoreTestCase {
         String search_line = "affafafafafaf";
         searchPageObject.typeSearchLine(search_line);
         searchPageObject.waitForEmptyResultsLabel();
-        searchPageObject.assertThereIsNoResultOfSearch();
+        if(Platform.getInstance().isAndroid()){
+            searchPageObject.assertThereIsNoResultOfSearch();
+        }
     }
 
     @Test
