@@ -77,6 +77,9 @@ public class SearchTests extends CoreTestCase {
                 second_article_description = "2019 fantasy drama television series",
                 third_article_title = "The Witcher 3: Wild Hunt",
                 third_article_description = "2015 action role-playing video game";
+        if (Platform.getInstance().isMW()) {
+            third_article_description = "Action role-playing video game developed by CD Projekt RED";
+        }
         SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
         searchPageObject.initSearchInput();
         searchPageObject.typeSearchLine(search_line);
