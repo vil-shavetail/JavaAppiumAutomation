@@ -38,7 +38,7 @@ public class ArticleTests extends CoreTestCase {
         ArticlePageObject articlePageObject = ArticlePageObjectFactory.get(driver);
         if(Platform.getInstance().isAndroid()){
             articlePageObject.waitForTitleElement();
-        }else {
+        } else if(Platform.getInstance().isIOS()) {
             articlePageObject.waitForTitleElement(expected_article_title);
         }
         articlePageObject.swipeToFooter();
@@ -50,8 +50,10 @@ public class ArticleTests extends CoreTestCase {
         String search_article_title_locator;
         if(Platform.getInstance().isAndroid()) {
             search_article_title_locator = "xpath://*[@resource-id='org.wikipedia:id/view_page_title_text'][@text='" + search_line + "']";
-        } else {
+        } else if(Platform.getInstance().isIOS()) {
             search_article_title_locator = "id:Yamaha Niken";
+        } else {
+            search_article_title_locator = "xpath://a[contains(@class, 'title')][contains(@data-title, '{TITLE}')]/..";
         }
 
         SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);

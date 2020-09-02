@@ -13,7 +13,11 @@ public class SearchTests extends CoreTestCase {
         SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
         searchPageObject.initSearchInput();
         searchPageObject.typeSearchLine("Java");
-        searchPageObject.waitForSearchResult("Object-oriented programming language");
+        if(Platform.getInstance().isMW()) {
+            searchPageObject.waitForSearchResult("Java (programming language)");
+        } else {
+            searchPageObject.waitForSearchResult("Object-oriented programming language");
+        }
     }
 
     @Test

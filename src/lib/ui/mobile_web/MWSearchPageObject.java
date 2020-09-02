@@ -9,10 +9,6 @@ public class MWSearchPageObject extends SearchPageObject {
         SEARCH_INPUT = "css:form>input[type='search']";
         SEARCH_CANCEL_BUTTON = "css:div.header-action>button.cancel";
         SEARCH_RESULT_BY_SUBSTRING_TPL = "xpath://div[contains(@class, 'wikidata-description')][contains(text(), '{SUBSTRING}')]";
-
-        //Use this locator for testFindCoupleOfArticlesAndCancelSearch() method.
-        //SEARCH_RESULT_BY_SUBSTRING_TPL = "xpath://a[contains(@class, 'title')][contains(@data-title, '{SUBSTRING}')]";
-
         SEARCH_RESULT_BY_TWO_SUBSTRING_TPL = "xpath://a[contains(@class, 'title')][contains(@data-title, '{TITLE}')]/..//div[contains(@class, 'wikidata-description')][contains(text(), '{DESCRIPTION}')]/../..";
         SEARCH_RESULT_ELEMENT = "css:ul.page-list>li.page-summary>a>div.wikidata-description";
         SEARCH_EMPTY_RESULT_ELEMENT = "css:p.without-results";

@@ -1,5 +1,6 @@
 package lib.ui;
 
+import lib.Platform;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 abstract public class SearchPageObject extends MainPageObject {
@@ -19,6 +20,9 @@ abstract public class SearchPageObject extends MainPageObject {
 
     /* TEMPLATES METHODS */
     private static String getResultSearchElement(String substring) {
+        if(Platform.getInstance().isMW()) {
+            SEARCH_RESULT_BY_SUBSTRING_TPL = "xpath://a[contains(@class, 'title')][contains(@data-title, '{SUBSTRING}')]";
+        }
         return SEARCH_RESULT_BY_SUBSTRING_TPL.replace("{SUBSTRING}", substring);
     }
 
