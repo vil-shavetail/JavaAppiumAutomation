@@ -1,7 +1,7 @@
 package lib.ui.ios;
 
-import io.appium.java_client.AppiumDriver;
 import lib.ui.MyListsPageObject;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class IOSMyListsPageObject extends MyListsPageObject {
     static {
@@ -10,7 +10,7 @@ public class IOSMyListsPageObject extends MyListsPageObject {
         DELETE_LIST_BUTTON = "xpath://*[@text='Delete list']";
         MORE_OPTIONS_BUTTON = "id:org.wikipedia:id/item_overflow_menu";
     }
-    public IOSMyListsPageObject(AppiumDriver driver){
+    public IOSMyListsPageObject(RemoteWebDriver driver){
         super(driver);
     }
 }
