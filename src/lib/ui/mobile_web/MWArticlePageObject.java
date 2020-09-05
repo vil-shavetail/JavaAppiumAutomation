@@ -7,7 +7,8 @@ public class MWArticlePageObject extends ArticlePageObject {
     static{
         TITLE = "css:#content h1";
         FOOTER_ELEMENT = "css:#mw-mf-page-center footer";
-        OPTIONS_ADD_TO_MY_LIST_BUTTON = "css:#page-actions li#ca-watch button";
+        OPTIONS_ADD_TO_MY_LIST_BUTTON = "css:li#page-actions-watch";
+        OPTIONS_REMOVE_FROM_MY_LIST_BUTTON = "css:#page-actions li#ca-watch.mw-ui-icon-mf-watched watched button";
     }
 
     public MWArticlePageObject(RemoteWebDriver driver) {

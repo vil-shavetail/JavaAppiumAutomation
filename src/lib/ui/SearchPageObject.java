@@ -26,6 +26,13 @@ abstract public class SearchPageObject extends MainPageObject {
         return SEARCH_RESULT_BY_SUBSTRING_TPL.replace("{SUBSTRING}", substring);
     }
 
+    private static String getMWResultSearchElement(String substring) {
+        if(Platform.getInstance().isMW()) {
+            SEARCH_RESULT_BY_SUBSTRING_TPL = "xpath://ul[contains(@class, 'watchlist')]//h3[contains(text(), '{SUBSTRING}')]/..";
+        }
+        return SEARCH_RESULT_BY_SUBSTRING_TPL.replace("{SUBSTRING}", substring);
+    }
+
     private static String getReulstSearchElementByTitleAndDescription(String title, String descritption) {
         return SEARCH_RESULT_BY_TWO_SUBSTRING_TPL.replace("{TITLE}", title).replace("{DESCRIPTION}", descritption);
     }
@@ -87,6 +94,15 @@ abstract public class SearchPageObject extends MainPageObject {
 
     public void clickByArticleWithSubString(String substring) {
         String search_result_xpath = getResultSearchElement(substring);
+        this.waitForElementAndClick(
+                search_result_xpath,
+                "Cannot find and click search result with substring " + substring,
+                10
+        );
+    }
+
+    public void clickByMWResultArticleWithSubString(String substring) {
+        String search_result_xpath = getMWResultSearchElement(substring);
         this.waitForElementAndClick(
                 search_result_xpath,
                 "Cannot find and click search result with substring " + substring,
